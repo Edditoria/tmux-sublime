@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Tmux conf
+file_extensions:
+  - tmux.conf
+  - .tmux.conf
+scope: source.tmux
+
+# MARK:--
+
+contexts:
+  main:
+    # MARK: Tmux cmd
+
+    - match: \b(bind|unbind)(-key)?\b
+      scope: support.function.tmux
+    - match: \b(setw|set-window-option)\b
+      scope: support.function.tmux
+    - match: \b(set(-option)?)\b
+      scope: support.function.tmux
+
+    - match: \s-[a-zA-Z]+
+      scope: constant.language.flag.tmux
+    - match: \bon\b
+      scope: constant.language.boolean.true.tmux
+    - match: \boff\b
+      scope: constant.language.boolean.false.tmux
+
+    # MARK: Str, num
+
+    - match: "'"
+      scope: punctuation.definition.string.begin.tmux
+      push:
+        - meta_scope: string.quoted.double.tmux
+        - match: "'"
+          scope: punctuation.definition.string.end.tmux
+          pop: true
+        - match: \\$
+          scope: meta.string.continuation.tmux
+    - match: '"'
+      scope: punctuation.definition.string.begin.tmux
+      push:
+        - meta_scope: string.quoted.double.tmux
+        - match: '"'
+          scope: punctuation.definition.string.end.tmux
+          pop: true
+        - match: \\"
+          scope: constant.character.escape.tmux
+        - match: \\$
+          scope: meta.string.continuation.tmux
+    - match: (\+|\-)?\d+
+      scope: constant.numeric.tmux
+
+    # MARK: Comment
+
+    - match: ^\s*(#.*)$
+      scope: comment.line.full-line.number-sign.tmux
+    - match: \s#.*
+      scope: comment.line.inline.number-sign.tmux
