@@ -27,7 +27,7 @@ contexts:
     - match: \boff\b
       scope: constant.language.boolean.false.tmux
 
-    # MARK: Str, num
+    # MARK: str, num, cmt
 
     - match: "'"
       scope: punctuation.definition.string.begin.tmux
@@ -38,6 +38,7 @@ contexts:
           pop: true
         - match: \\$
           scope: punctuation.separator.continuation.line.tmux
+
     - match: '"'
       scope: punctuation.definition.string.begin.tmux
       push:
@@ -47,16 +48,38 @@ contexts:
           pop: true
         - match: \\"
           scope: constant.character.escape.tmux
+        - match: (#)({)
+          captures:
+            1: punctuation.definition.variable.tmux
+            2: punctuation.section.expansion.parameter.begin.tmux
+          push: fmt_ctx
         - match: \\$
           scope: punctuation.separator.continuation.tmux
+
     - match: '\s[\+\-]\d+\b'
       scope: constant.numeric.tmux
     - match: \b\d+\b
       scope: constant.numeric.tmux
 
-    # MARK: Comment
-
     - match: ^\s*(#.*)$
       scope: comment.line.number-sign.tmux
     - match: \s#.*
       scope: comment.line.number-sign.tmux
+
+  # MARK:- more ctx
+
+  fmt_ctx:
+    # https://man.openbsd.org/OpenBSD-current/man1/tmux.1#FORMATS
+    - meta_scope: meta.group.expansion.parameter.tmux
+    - match: \\}
+      scope: constant.character.escape.tmux
+    - match: \}
+      scope: punctuation.section.expansion.parameter.end.tmux
+      pop: true
+    - match: (#)({)
+      captures:
+        1: punctuation.definition.variable.tmux
+        2: punctuation.section.expansion.parameter.begin.tmux
+      push: fmt_ctx
+    - match: \S
+      scope: variable.other.readwrite.shell
