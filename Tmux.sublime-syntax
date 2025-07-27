@@ -53,6 +53,26 @@ contexts:
             1: punctuation.definition.variable.tmux
             2: punctuation.section.expansion.parameter.begin.tmux
           push: fmt_ctx
+        - match: \\\$
+          scope: constant.character.escape.tmux
+        - match: (\$)({{shell_variable_chars_var}})
+          captures:
+            1: punctuation.definition.variable.shell
+            2: variable.other.readwrite.shell
+        - match: (\$)({)
+          captures:
+            1: punctuation.definition.variable.shell
+            2: punctuation.section.expansion.parameter.begin.shell
+          push:
+            - match: \\\}
+              scope: constant.character.escape.shell
+            - match: \}
+              scope: punctuation.section.expansion.parameter.end.shell
+              pop: true
+            - match: \\\$
+              scope: constant.character.escape.shell
+            - match: "{{shell_variable_chars_var}}"
+              scope: variable.other.readwrite.shell
         - match: \\$
           scope: punctuation.separator.continuation.tmux
 
@@ -83,3 +103,8 @@ contexts:
       push: fmt_ctx
     - match: \S
       scope: variable.other.readwrite.shell
+
+# MARK:- variables
+
+variables:
+  shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
