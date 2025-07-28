@@ -19,6 +19,8 @@ contexts:
       scope: support.function.tmux
     - match: \b(set(-option)?)\b
       scope: support.function.tmux
+    - match: \b({{cmd_var}})\b
+      scope: support.function.tmux
 
     - match: \s-[a-zA-Z]+
       scope: variable.parameter.option.tmux
@@ -108,3 +110,12 @@ contexts:
 
 variables:
   shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
+  cmd_var: "{{cmd_popular_var}}|{{cmd_clients_sessions_var}}"
+  cmd_popular_var: "\
+    show(-messages|msgs)|source(-file)?|\
+    new(-session)?|rename(-session)?|switch(-client|c)"
+  # Ref: Tmux man-page: Clients and Sessions
+  cmd_clients_sessions_var: "\
+    attach(-session)?|detach(-client)?|has(-session)?|kill-(server|session)|\
+    list-(clients|commands|sessions)|ls(c|cm)?|lock(-client|c|-session|s)|\
+    refresh(-client)?|server-access|start(-server)?|suspend(-client|c)"
