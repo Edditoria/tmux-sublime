@@ -110,7 +110,7 @@ contexts:
 
 variables:
   shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
-  cmd_var: "{{cmd_popular_var}}|{{cmd_clients_sessions_var}}"
+  cmd_var: "{{cmd_popular_var}}|{{cmd_clients_sessions_var}}|{{cmd_copy_mode_var}}"
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)"
@@ -119,3 +119,28 @@ variables:
     attach(-session)?|detach(-client)?|has(-session)?|kill-(server|session)|\
     list-(clients|commands|sessions)|ls(c|cm)?|lock(-client|c|-session|s)|\
     refresh(-client)?|server-access|start(-server)?|suspend(-client|c)"
+  # Ref: Tmux man-page: Windows and Panes: copy-mode
+  # > The following commands are supported in copy mode.
+  cmd_copy_mode_var: "\
+    append-selection(-and-cancel)?|back-to-indentation|begin-selection|\
+    bottom-line|cancel|clear-selection|\
+    copy-(\
+    (end-of-line(-and-cancel)?)|(line(-and-cancel)?)|\
+    (pipe-end-of-line(-and-cancel)?)|\
+    (pipe-line(-and-cancel)?)|\
+    (pipe(-no-clear|-and-cancel)?)|\
+    (selection(-no-clear|-and-cancel)?)\
+    )|\
+    cursor-((down(-and-cancel)?)|left|right|up)|\
+    end-of-line|goto-line|\
+    halfpage-(down(-and-cancel)?|up|bottom|top)|\
+    jump-(again|backward|forward|reverse|to-(backward|forward|mark))|\
+    middle-line|\
+    next-(matching-bracket|paragraph|prompt|word(-end)?|space(-end)?)|\
+    other-end|page-(down(-and-cancel)?|up)|\
+    pipe(-no-clear|-and-cancel)?|\
+    previous-(matching-bracket|paragraph|prompt|word|space)|\
+    rectangle-(on|off|toggle)|refresh-from-pane|\
+    scroll-(bottom|down(-and-cancel)?|middle|top|up)|\
+    search-(again|backward(-incremental|-text)?|forward(-incremental|-text)?|reverse)|\
+    select-(line|word)|set-mark|start-of-line|stop-selection|toggle-position|top-line"
