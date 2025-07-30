@@ -116,8 +116,7 @@ variables:
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)|\
-    {{env_cmd__var}}\
-    "
+    {{misc_cmd__var}}|{{env_cmd__var}}"
   # Ref: Tmux man-page: Clients and Sessions
   cmd_clients_sessions_var: "\
     attach(-session)?|detach(-client)?|has(-session)?|kill-(server|session)|\
@@ -169,3 +168,5 @@ variables:
   buffer_cmd__var: "\
     choose-buffer|clear(-history|hist)|delete(-buffer|b)|list-buffers|lsb|\
     load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)|set(-buffer|b)|show(-buffer|b)"
+  # Ref: Manual page: Miscellaneous
+  misc_cmd__var: "clock-mode|if(-shell)?|lock(-server)|run(-shell)?|wait(-for)?"
