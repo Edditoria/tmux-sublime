@@ -113,7 +113,7 @@ variables:
   cmd_var: "\
     {{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|\
     {{key_cmd__var}}|{{buffer_cmd__var}}|{{cmd_copy_mode_var}}|\
-    {{status_cmd__var}}|{{option_cmd__var}}"
+    {{status_cmd__var}}|{{option_cmd__var}}|{{hook_cmd__var}}"
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)|\
@@ -163,6 +163,8 @@ variables:
   key_cmd__var: "list-keys|lsk|send(-keys|-prefix)?"
   # Ref: Manual page: Options
   option_cmd__var: "show(-options)?"
+  # Ref: Manual page: Hooks
+  hook_cmd__var: "set-hook|show-hook"
   # Ref: Manual page: Global And Session Environment
   env_cmd__var: "set(-environment|env)|show(-environment|env)"
   # Ref: Manual page: Status Line
