@@ -110,7 +110,9 @@ contexts:
 
 variables:
   shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
-  cmd_var: "{{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|{{cmd_copy_mode_var}}|{{status_cmd__var}}"
+  cmd_var: "\
+    {{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|\
+    {{buffer_cmd__var}}|{{cmd_copy_mode_var}}|{{status_cmd__var}}"
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)|\
@@ -163,3 +165,7 @@ variables:
   status_cmd__var: "\
     clear(-prompt-history|phist)|command-prompt|confirm(-before)?|\
     display-(menu|message|popup)|menu|display|popup|show(-prompt-history|phist)"
+  # Ref: Manual page: Buffers
+  buffer_cmd__var: "\
+    choose-buffer|clear(-history|hist)|delete(-buffer|b)|list-buffers|lsb|\
+    load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)|set(-buffer|b)|show(-buffer|b)"
