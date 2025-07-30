@@ -110,7 +110,7 @@ contexts:
 
 variables:
   shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
-  cmd_var: "{{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|{{cmd_copy_mode_var}}"
+  cmd_var: "{{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|{{cmd_copy_mode_var}}|{{status_cmd__var}}"
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)|\
@@ -159,3 +159,7 @@ variables:
     swap(-pane|p|-window|w)|unlink(-window|w)"
   # Ref: Manual page: Global And Session Environment
   env_cmd__var: "set(-environment|env)|show(-environment|env)"
+  # Ref: Manual page: Status Line
+  status_cmd__var: "\
+    clear(-prompt-history|phist)|command-prompt|confirm(-before)?|\
+    display-(menu|message|popup)|menu|display|popup|show(-prompt-history|phist)"
