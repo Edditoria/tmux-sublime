@@ -110,7 +110,7 @@ contexts:
 
 variables:
   shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
-  cmd_var: "{{cmd_popular_var}}|{{cmd_clients_sessions_var}}|{{cmd_copy_mode_var}}"
+  cmd_var: "{{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|{{cmd_copy_mode_var}}"
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)"
@@ -144,3 +144,14 @@ variables:
     scroll-(bottom|down(-and-cancel)?|middle|top|up)|\
     search-(again|backward(-incremental|-text)?|forward(-incremental|-text)?|reverse)|\
     select-(line|word)|set-mark|start-of-line|stop-selection|toggle-position|top-line"
+  # Ref: Manual page: Windows And Panes
+  # https://man.openbsd.org/OpenBSD-current/man1/tmux.1#break-pane
+  window_pane_cmd__var: "\
+    break(-pane|p)|capture(-pane|p)|choose-(client|tree)|customize-mode|\
+    display(-panes|p)|find(-window|w)|join(-pane|p)|kill(-pane|p|-window|w)|\
+    last(-pane|p|-window)?|link(-window|w)|list-(panes|windows)|ls(p|w)|\
+    move(-pane|p|-window|w)|new(-window|w)|next(-layout|l|window)?|\
+    pipe(-pane|p)|previous(-layout|l|-window)|prev|rename(-window|w)|\
+    resize(-pane|p|-window|w)|respawn(-pane|p|-window|w)|rotate(-window|w)|\
+    select(-layout|l|-pane|p|-window|w)|split(-window|w)|\
+    swap(-pane|p|-window|w)|unlink(-window|w)"
