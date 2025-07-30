@@ -112,7 +112,7 @@ variables:
   shell_variable_chars_var: "[a-zA-Z_][a-zA-Z_0-9]*"
   cmd_var: "\
     {{cmd_popular_var}}|{{window_pane_cmd__var}}|{{cmd_clients_sessions_var}}|\
-    {{buffer_cmd__var}}|{{cmd_copy_mode_var}}|{{status_cmd__var}}"
+    {{key_cmd__var}}|{{buffer_cmd__var}}|{{cmd_copy_mode_var}}|{{status_cmd__var}}"
   cmd_popular_var: "\
     show(-messages|msgs)|source(-file)?|\
     new(-session)?|rename(-session)?|switch(-client|c)|\
@@ -158,6 +158,8 @@ variables:
     resize(-pane|p|-window|w)|respawn(-pane|p|-window|w)|rotate(-window|w)|\
     select(-layout|l|-pane|p|-window|w)|split(-window|w)|\
     swap(-pane|p|-window|w)|unlink(-window|w)"
+  # Ref: Manual page: Key Bindings
+  key_cmd__var: "list-keys|lsk|send(-keys|-prefix)?"
   # Ref: Manual page: Global And Session Environment
   env_cmd__var: "set(-environment|env)|show(-environment|env)"
   # Ref: Manual page: Status Line
