@@ -126,6 +126,7 @@ variables:
   # Ref: Tmux man-page: Windows and Panes: copy-mode
   # > The following commands are supported in copy mode.
   cmd_copy_mode_var: "\
+    copy-mode|\
     append-selection(-and-cancel)?|back-to-indentation|begin-selection|\
     bottom-line|cancel|clear-selection|\
     copy-(\
