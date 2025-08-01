@@ -139,6 +139,7 @@ variables:
     cursor-((down(-and-cancel)?)|left|right|up)|\
     end-of-line|goto-line|\
     halfpage-(down(-and-cancel)?|up|bottom|top)|\
+    history-(bottom|top)|\
     jump-(again|backward|forward|reverse|to-(backward|forward|mark))|\
     middle-line|\
     next-(matching-bracket|paragraph|prompt|word(-end)?|space(-end)?)|\
@@ -156,7 +157,8 @@ variables:
     display(-panes|p)|find(-window|w)|join(-pane|p)|kill(-pane|p|-window|w)|\
     last(-pane|p|-window)?|link(-window|w)|list-(panes|windows)|ls(p|w)|\
     move(-pane|p|-window|w)|new(-window|w)|next(-layout|l|window)?|\
-    pipe(-pane|p)|previous(-layout|l|-window)|prev|rename(-window|w)|\
+    pipe(-pane|p)|\
+    prev(ious-(layout|window)|l)?|rename(-window|w)|\
     resize(-pane|p|-window|w)|respawn(-pane|p|-window|w)|rotate(-window|w)|\
     select(-layout|l|-pane|p|-window|w)|split(-window|w)|\
     swap(-pane|p|-window|w)|unlink(-window|w)"
