@@ -15,10 +15,7 @@ contexts:
 
     - match: \b(bind|unbind)(-key)?\b
       scope: support.function.tmux
-    - match: \b(setw|set-window-option)\b
-      scope: support.function.tmux
-    - match: \b(set(-option)?)\b
-      scope: support.function.tmux
+    - include: set_cmd__ctx
     - match: \b({{cmd__var}})\b
       scope: support.function.tmux
 
@@ -90,6 +87,14 @@ contexts:
 
   # MARK:- more ctx
 
+  set_cmd__ctx:
+    - match: \b(set(-buffer|-environment|-hook|-mark|b|env))\b
+      scope: support.function.tmux
+    - match: \b(setw|set-window-option)\b
+      scope: support.function.tmux
+    - match: \b(set(-option)?)\b
+      scope: support.function.tmux
+
   fmt__ctx:
     # https://man.openbsd.org/OpenBSD-current/man1/tmux.1#FORMATS
     - meta_scope: meta.group.expansion.parameter.tmux
@@ -149,7 +154,7 @@ variables:
     rectangle-(on|off|toggle)|refresh-from-pane|\
     scroll-(bottom|down(-and-cancel)?|middle|top|up)|\
     search-(again|backward(-incremental|-text)?|forward(-incremental|-text)?|reverse)|\
-    select-(line|word)|set-mark|start-of-line|stop-selection|toggle-position|top-line"
+    select-(line|word)|start-of-line|stop-selection|toggle-position|top-line"
   # Ref: Manual page: Windows And Panes
   # https://man.openbsd.org/OpenBSD-current/man1/tmux.1#break-pane
   window_pane_cmd__var: "\
@@ -167,9 +172,9 @@ variables:
   # Ref: Manual page: Options
   option_cmd__var: "show(-options)?"
   # Ref: Manual page: Hooks
-  hook_cmd__var: "set-hook|show-hook"
+  hook_cmd__var: "show-hook"
   # Ref: Manual page: Global And Session Environment
-  env_cmd__var: "set(-environment|env)|show(-environment|env)"
+  env_cmd__var: "show(-environment|env)"
   # Ref: Manual page: Status Line
   status_cmd__var: "\
     clear(-prompt-history|phist)|command-prompt|confirm(-before)?|\
@@ -177,6 +182,6 @@ variables:
   # Ref: Manual page: Buffers
   buffer_cmd__var: "\
     choose-buffer|clear(-history|hist)|delete(-buffer|b)|list-buffers|lsb|\
-    load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)|set(-buffer|b)|show(-buffer|b)"
+    load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)|show(-buffer|b)"
   # Ref: Manual page: Miscellaneous
   misc_cmd__var: "clock-mode|if(-shell)?|lock(-server)|run(-shell)?|wait(-for)?"
