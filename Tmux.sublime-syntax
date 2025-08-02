@@ -116,22 +116,31 @@ contexts:
 variables:
   shell_chars__var: "[a-zA-Z_][a-zA-Z_0-9]*"
   cmd__var: "\
-    {{prior_cmd__var}}|{{window_pane_cmd__var}}|{{client_session_cmd__var}}|\
-    {{key_cmd__var}}|{{buffer_cmd__var}}|{{copy_mode_cmd__var}}|\
-    {{status_cmd__var}}|{{option_cmd__var}}|{{hook_cmd__var}}"
+    {{prior_cmd__var}}|{{misc_cmd__var}}|{{window_pane_cmd__var}}|\
+    {{client_session_cmd__var}}|{{key_cmd__var}}|{{buffer_cmd__var}}|\
+    {{copy_mode_cmd__var}}|{{status_cmd__var}}"
   prior_cmd__var: "\
-    show(-messages|msgs)|source(-file)?|\
-    new(-session)?|rename(-session)?|switch(-client|c)|\
-    {{misc_cmd__var}}|{{env_cmd__var}}"
+    copy-mode|\
+    display(-menu|-message|-popup|-panes|p)?|\
+    ls(b|cm|c|k|p|w)?|\
+    lock(-client|-server|-session|c|s)?|\
+    new(-window|-session|w)?|\
+    next-(layout|matching-bracket|paragraph|prompt|space(-end)?|word(-end)?|window)|\
+    next(l)?|\
+    refresh(-client|-from-pane)?|\
+    rename(-window|-session|w)?|\
+    show-(buffer|environment|hook|messages|options|prompt-history)|\
+    show(b|env|msgs|phist)?|\
+    source(-file)?|\
+    start(-of-line|-server)?|\
+    switch(-client|c)"
   # Ref: Manual page: Clients And Sessions
   client_session_cmd__var: "\
     attach(-session)?|detach(-client)?|has(-session)?|kill-(server|session)|\
-    list-(clients|commands|sessions)|ls(c|cm)?|lock(-client|c|-session|s)|\
-    refresh(-client)?|server-access|start(-server)?|suspend(-client|c)"
+    list-(clients|commands|sessions)|server-access|suspend(-client|c)"
   # Ref: Manual page: Windows And Panes: copy-mode
   # > The following commands are supported in copy mode.
   copy_mode_cmd__var: "\
-    copy-mode|\
     append-selection(-and-cancel)?|back-to-indentation|begin-selection|\
     bottom-line|cancel|clear-selection|\
     copy-(\
@@ -146,42 +155,31 @@ variables:
     halfpage-(down(-and-cancel)?|up|bottom|top)|\
     history-(bottom|top)|\
     jump-(again|backward|forward|reverse|to-(backward|forward|mark))|\
-    middle-line|\
-    next-(matching-bracket|paragraph|prompt|word(-end)?|space(-end)?)|\
-    other-end|page-(down(-and-cancel)?|up)|\
+    middle-line|other-end|page-(down(-and-cancel)?|up)|\
     pipe(-no-clear|-and-cancel)?|\
     previous-(matching-bracket|paragraph|prompt|word|space)|\
-    rectangle-(on|off|toggle)|refresh-from-pane|\
+    rectangle-(on|off|toggle)|\
     scroll-(bottom|down(-and-cancel)?|middle|top|up)|\
     search-(again|backward(-incremental|-text)?|forward(-incremental|-text)?|reverse)|\
-    select-(line|word)|start-of-line|stop-selection|toggle-position|top-line"
+    select-(line|word)|stop-selection|toggle-position|top-line"
   # Ref: Manual page: Windows And Panes
   # https://man.openbsd.org/OpenBSD-current/man1/tmux.1#break-pane
   window_pane_cmd__var: "\
     break(-pane|p)|capture(-pane|p)|choose-(client|tree)|customize-mode|\
-    display(-panes|p)|find(-window|w)|join(-pane|p)|kill(-pane|p|-window|w)|\
-    last(-pane|p|-window)?|link(-window|w)|list-(panes|windows)|ls(p|w)|\
-    move(-pane|p|-window|w)|new(-window|w)|next(-layout|l|window)?|\
-    pipe(-pane|p)|\
-    prev(ious-(layout|window)|l)?|rename(-window|w)|\
+    find(-window|w)|join(-pane|p)|kill(-pane|p|-window|w)|\
+    last(-pane|p|-window)?|link(-window|w)|list-(panes|windows)|\
+    move(-pane|p|-window|w)|pipe(-pane|p)|prev(ious-(layout|window)|l)?|\
     resize(-pane|p|-window|w)|respawn(-pane|p|-window|w)|rotate(-window|w)|\
     select(-layout|l|-pane|p|-window|w)|split(-window|w)|\
     swap(-pane|p|-window|w)|unlink(-window|w)"
   # Ref: Manual page: Key Bindings
-  key_cmd__var: "list-keys|lsk|send(-keys|-prefix)?"
-  # Ref: Manual page: Options
-  option_cmd__var: "show(-options)?"
-  # Ref: Manual page: Hooks
-  hook_cmd__var: "show-hook"
-  # Ref: Manual page: Global And Session Environment
-  env_cmd__var: "show(-environment|env)"
+  key_cmd__var: "list-keys|send(-keys|-prefix)?"
   # Ref: Manual page: Status Line
   status_cmd__var: "\
-    clear(-prompt-history|phist)|command-prompt|confirm(-before)?|\
-    display-(menu|message|popup)|menu|display|popup|show(-prompt-history|phist)"
+    clear(-prompt-history|phist)|command-prompt|confirm(-before)?|menu|popup"
   # Ref: Manual page: Buffers
   buffer_cmd__var: "\
-    choose-buffer|clear(-history|hist)|delete(-buffer|b)|list-buffers|lsb|\
-    load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)|show(-buffer|b)"
+    choose-buffer|clear(-history|hist)|delete(-buffer|b)|list-buffers|\
+    load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)"
   # Ref: Manual page: Miscellaneous
-  misc_cmd__var: "clock-mode|if(-shell)?|lock(-server)|run(-shell)?|wait(-for)?"
+  misc_cmd__var: "clock-mode|if(-shell)?|run(-shell)?|wait(-for)?"
