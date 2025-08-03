@@ -11,6 +11,11 @@ scope: source.tmux
 
 contexts:
   main:
+    # MARK: control flow
+
+    - match: '(^%|\s%)(if|elif|else|endif)\b'
+      scope: keyword.control.conditional.tmux
+
     # MARK: Tmux cmd
 
     - match: \b(bind|unbind)(-key)?\b
