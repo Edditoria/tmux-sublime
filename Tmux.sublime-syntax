@@ -100,6 +100,8 @@ contexts:
       scope: support.function.tmux
     - match: \b(set(-option)?)\b
       scope: support.function.tmux
+    - match: \b({{server_opt__var}})\b
+      scope: constant.language.tmux-option.tmux
 
   select_cmd__ctx:
     - match: \b(select(-layout|l))\b
@@ -199,6 +201,17 @@ variables:
     load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)"
   # Ref: Manual page: Miscellaneous
   misc_cmd__var: "clock-mode|if(-shell)?|run(-shell)?|wait(-for)?"
+
+  # MARK: opt vars
+
+  # Ref: Manual page: Options
+  # > Available server options are:
+  server_opt__var: "\
+    backspace|buffer-limit|command-alias|codepoint-widths|copy-command|\
+    default-client-command|default-terminal|escape-time|editor|\
+    exit-(empty|unattached)|extended-keys(-format)?|focus-events|history-file|\
+    input-buffer-size|message-limit|prompt-history-limit|set-clipboard|\
+    terminal-(features|overrides)|user-keys|variation-selector-always-wide"
 
   # MARK: other vars
 
