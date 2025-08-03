@@ -21,6 +21,7 @@ contexts:
     - match: \b(bind|unbind)(-key)?\b
       scope: support.function.tmux
     - include: set_cmd__ctx
+    - include: select_cmd__ctx
     - match: \b({{cmd__var}})\b
       scope: support.function.tmux
 
@@ -90,7 +91,7 @@ contexts:
     - match: \s#.*
       scope: comment.line.number-sign.tmux
 
-  # MARK:- more ctx
+  # MARK:- cmd ctx
 
   set_cmd__ctx:
     - match: \b(set(-buffer|-environment|-hook|-mark|b|env))\b
@@ -99,6 +100,16 @@ contexts:
       scope: support.function.tmux
     - match: \b(set(-option)?)\b
       scope: support.function.tmux
+
+  select_cmd__ctx:
+    - match: \b(select(-layout|l))\b
+      scope: support.function.tmux
+    - match: \b({{layout_name__var}})\b
+      # scope: variable.parameter.select-layout.tmux
+      # scope: variable.other.constant.select-layout.tmux
+      scope: constant.language.select-layout.tmux
+
+  # MARK: more ctx
 
   fmt__ctx:
     # https://man.openbsd.org/OpenBSD-current/man1/tmux.1#FORMATS
@@ -116,7 +127,7 @@ contexts:
     - match: \S
       scope: variable.other.readwrite.tmux
 
-# MARK:- variables
+# MARK:- cmd vars
 
 variables:
   shell_chars__var: "[a-zA-Z_][a-zA-Z_0-9]*"
@@ -175,7 +186,7 @@ variables:
     last(-pane|p|-window)?|link(-window|w)|list-(panes|windows)|\
     move(-pane|p|-window|w)|pipe(-pane|p)|prev(ious-(layout|window)|l)?|\
     resize(-pane|p|-window|w)|respawn(-pane|p|-window|w)|rotate(-window|w)|\
-    select(-layout|l|-pane|p|-window|w)|split(-window|w)|\
+    select(-pane|p|-window|w)|split(-window|w)|\
     swap(-pane|p|-window|w)|unlink(-window|w)"
   # Ref: Manual page: Key Bindings
   key_cmd__var: "list-keys|send(-keys|-prefix)?"
@@ -188,3 +199,11 @@ variables:
     load(-buffer|b)|paste(-buffer|b)|save(-buffer|b)"
   # Ref: Manual page: Miscellaneous
   misc_cmd__var: "clock-mode|if(-shell)?|run(-shell)?|wait(-for)?"
+
+  # MARK: other vars
+
+  # Layout-name for select-layout command.
+  # > The following layouts are supported:
+  layout_name__var: "\
+    even-(horizontal|vertical)|\
+    main-(horizontal(-mirrored)?|vertical(-mirrored)?)|tiled"
