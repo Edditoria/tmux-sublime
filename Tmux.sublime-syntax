@@ -100,7 +100,7 @@ contexts:
       scope: support.function.tmux
     - match: \b(set(-option)?)(?!-)\b
       scope: support.function.tmux
-    - match: \b({{server_opt__var}})\b
+    - match: \b({{session_opt__var}}|{{server_opt__var}})\b
       scope: constant.language.tmux-option.tmux
 
   select_cmd__ctx:
@@ -212,6 +212,20 @@ variables:
     exit-(empty|unattached)|extended-keys(-format)?|focus-events|history-file|\
     input-buffer-size|message-limit|prompt-history-limit|set-clipboard|\
     terminal-(features|overrides)|user-keys|variation-selector-always-wide"
+  # Ref: Manual page: Options
+  # > Available session options are:
+  session_opt__var: "\
+    activity-action|assume-paste-time|base-index|bell-action|\
+    default-(command|shell|size)|destroy-unattached|detach-on-destroy|\
+    display-(panes-(active-colour|colour|time)|time)|\
+    history-limit|initial-repeat-time|key-table|lock-(after-time|command)|\
+    menu-(style|selected-style|border-(style|lines))|\
+    message-(command-style|line|style)|mouse|prefix(2|-timeout)?|\
+    prompt-cursor-(colour|style)|renumber-windows|repeat-time|\
+    set-titles(-string)?|silence-action|\
+    status-(position|format|interval|justify|keys|style)|\
+    status(-left(-length|-style)?|-right(-length|-style)?)?|\
+    update-environment|visual-(activity|bell|silence)|word-separators"
 
   # MARK: other vars
 
