@@ -100,7 +100,7 @@ contexts:
       scope: support.function.tmux
     - match: \b(set(-option)?)(?!-)\b
       scope: support.function.tmux
-    - match: \b({{session_opt__var}}|{{server_opt__var}})\b
+    - match: \b({{session_opt__var}}|{{window_opt__var}}|{{server_opt__var}})\b
       scope: constant.language.tmux-option.tmux
 
   select_cmd__ctx:
@@ -226,6 +226,20 @@ variables:
     status-(position|format|interval|justify|keys|style)|\
     status(-left(-length|-style)?|-right(-length|-style)?)?|\
     update-environment|visual-(activity|bell|silence)|word-separators"
+  # Ref: Manual page: Options
+  # Available window options are:
+  window_opt__var: "\
+    aggressive-resize|automatic-rename(-format)?|clock-mode-(colour|style)|\
+    fill-character|main-pane-(height|width)|\
+    copy-mode-((current-match|match|mark|selection)-style|position-(format|style))|\
+    mode-(keys|style)|monitor-(activity|bell|silence)|\
+    other-pane-(height|width)|\
+    pane-(active-border-style|base-index)|\
+    pane-border-(format|indicators|lines|status|style)|\
+    pane-scrollbars(-style|-position)?|\
+    popup-(style|border-(style|lines))|\
+    window-status-((activity-|bell-|last-)?style|current-(format|style)|format|separator)|\
+    window-size|wrap-search"
 
   # MARK: other vars
 
