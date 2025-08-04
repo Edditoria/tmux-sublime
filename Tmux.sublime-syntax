@@ -98,7 +98,7 @@ contexts:
       scope: support.function.tmux
     - match: \b(setw|set-window-option)\b
       scope: support.function.tmux
-    - match: \b(set(-option)?)\b
+    - match: \b(set(-option)?)(?!-)\b
       scope: support.function.tmux
     - match: \b({{server_opt__var}})\b
       scope: constant.language.tmux-option.tmux
