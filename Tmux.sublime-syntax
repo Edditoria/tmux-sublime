@@ -100,7 +100,7 @@ contexts:
       scope: support.function.tmux
     - match: \b(set(-option)?)(?!-)\b
       scope: support.function.tmux
-    - match: \b({{session_opt__var}}|{{window_opt__var}}|{{server_opt__var}})\b
+    - match: \b({{pane_opt__var}}|{{session_opt__var}}|{{window_opt__var}}|{{server_opt__var}})\b
       scope: constant.language.tmux-option.tmux
 
   select_cmd__ctx:
@@ -240,6 +240,12 @@ variables:
     popup-(style|border-(style|lines))|\
     window-status-((activity-|bell-|last-)?style|current-(format|style)|format|separator)|\
     window-size|wrap-search"
+  # Ref: Manual page: Options
+  # Available pane options are:
+  pane_opt__var: "\
+    allow-(passthrough|rename|set-title)|alternate-screen|\
+    cursor-(colour|style)|pane-colours|remain-on-exit(-format)?|\
+    scroll-on-clear|synchronize-panes|window-(active-)?style"
 
   # MARK: other vars
 
