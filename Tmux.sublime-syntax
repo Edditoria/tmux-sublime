@@ -31,6 +31,8 @@ contexts:
       scope: constant.language.boolean.true.tmux
     - match: \boff\b
       scope: constant.language.boolean.false.tmux
+    - match: \b{{hook_name__var}}\b
+      scope: constant.language.hook-name.tmux
 
     # MARK: str, num, cmt
 
@@ -254,3 +256,15 @@ variables:
   layout_name__var: "\
     even-(horizontal|vertical)|\
     main-(horizontal(-mirrored)?|vertical(-mirrored)?)|tiled"
+
+  # Ref: Manual page: Hooks
+  # TODO: Don't know what control mode does...
+  # > All the notifications listed in the CONTROL MODE section are hooks (without any arguments), except %exit.
+  hook_name__var: "\
+    alert-(activity|bell|silence)|\
+    client-(active|attached|detached|focus-(in|out)|resized|session-changed)|\
+    client-(light|dark)-theme|\
+    command-error|\
+    pane-(died|exited|focus-(in|out)|set-clipboard)|\
+    session-(created|closed|renamed)|\
+    window-(layout-changed|linked|renamed|resized|unlinked)"
