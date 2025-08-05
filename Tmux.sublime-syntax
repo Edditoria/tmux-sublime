@@ -18,6 +18,8 @@ contexts:
 
     # MARK: Tmux cmd
 
+    - match: \b{{invalid__var}}\b
+      scope: invalid.deprecated.tmux
     - match: \b(bind|unbind)(-key)?\b
       scope: support.function.tmux
     - include: set_cmd__ctx
@@ -268,3 +270,7 @@ variables:
     pane-(died|exited|focus-(in|out)|set-clipboard)|\
     session-(created|closed|renamed)|\
     window-(layout-changed|linked|renamed|resized|unlinked)"
+
+  # Track keywords "deprecate" and "no longer" in:
+  # https://github.com/tmux/tmux/blob/master/CHANGES
+  invalid__var: "mouse-(resize-pane|select-(pane|window))|mode-mouse"
