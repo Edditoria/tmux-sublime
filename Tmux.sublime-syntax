@@ -125,13 +125,15 @@ contexts:
     - match: \}
       scope: punctuation.section.expansion.parameter.end.tmux
       pop: true
+    - match: \b{{fmt_name__var}}\b
+      scope: variable.other.readwrite.tmux
     - match: (#)({)
       captures:
         1: punctuation.definition.variable.tmux
         2: punctuation.section.expansion.parameter.begin.tmux
       push: fmt__ctx
-    - match: \S
-      scope: variable.other.readwrite.tmux
+    # - match: \S
+    #   scope: variable.other.readwrite.tmux
 
 # MARK:- cmd vars
 
@@ -250,6 +252,48 @@ variables:
     allow-(passthrough|rename|set-title)|alternate-screen|\
     cursor-(colour|style)|pane-colours|remain-on-exit(-format)?|\
     scroll-on-clear|synchronize-panes|window-(active-)?style"
+
+  # MARK: fmt vars
+
+  # Ref: Manual page: Formats
+  fmt_name__var: "\
+    active_window_index|alternate_(on|saved_(x|y))|\
+    buffer_(created|name|sample|size)|\
+    client_(activity|cell_(height|width)|control_mode|created|discarded|flags)|\
+    client_(height|key_table|last_session|name|pid|prefix|readonly|session)|\
+    client_(term(features|name|type)|tty|uid|user|utf8|width|written)|\
+    command(_list_(alias|name|usage))?|config_files|cursor_blinking|\
+    copy_cursor_(hyperlink|line|word|x|y)|current_file|\
+    cursor_(character|colour|flag|shape|very_visible|x|y)|\
+    history_(bytes|limit|size)|\
+    hook_(client|pane|session(_name)?|window(_name)?)|hook|\
+    host(_short)?|insert_flag|keypad_(cursor_)?flag|\
+    last_(session|window)_index|line|loop_last_flag|\
+    mouse_((all|any|button|sgr|standard|utf8)_flag|hyperlink|line)|\
+    mouse_(status_(line|range)|word|x|y)|\
+    next_session_id|origin_flag|\
+    pane_(active|at_(bottom|left|right|top)|bg|bottom|current_(command|path))|\
+    pane_(dead(_signal|_status|_time)?|fg|format|height|id|in_mode|index)|\
+    pane_(input_off|key_mode|last|left|marked(_set)?|mode|path|pid|pipe|right)|\
+    pane_(search_string|start_(command|path)|synchronized|tabs|title|top|tty)|\
+    pane_(unseen_changes|width)|\
+    pid|rectangle_toggle|scroll_(position|region_(lower|upper))|\
+    search_(count(_partial)?|match|present)|\
+    selection_(active|end_(x|y)|present|start_(x|y))|\
+    server_sessions|\
+    session_(active|activity(_flag)?|alerts|attached(_list)?|bell_flag)|\
+    session_(created|format)|\
+    session_group(_attached(_list)?|_list|_many_attached|_size|ed)?|\
+    session_(id|index|last_attached|many_attached|marked|name|path)|\
+    session_(silence_flag|stack|windows)|\
+    socket_path|sixel_support|start_time|uid|user|version|\
+    window_active(_clients(_list)?|_sessions(_list)?)?|\
+    window_(activity(_flag)?|bell_flag|cell_(height|width)|end_flag)|\
+    window_(flags|format|height|id|index|last_flag|layout)|\
+    window_(linked(_sessions(_list)?)?|marked_flag|name|offset_(x|y)|panes)|\
+    window_(raw_flags|silence_flag|stack_index|start_flag|visible_layout)|\
+    window_(width|zoomed_flag)|\
+    wrap_flag"
 
   # MARK: other vars
 
