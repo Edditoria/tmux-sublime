@@ -18,7 +18,7 @@ contexts:
 
     # MARK: Tmux cmd
 
-    - match: \b{{invalid__var}}\b
+    - match: \b({{invalid__var}})\b
       scope: invalid.deprecated.tmux
     - match: \b(bind|unbind)(-key)?\b
       scope: support.function.tmux
@@ -33,7 +33,7 @@ contexts:
       scope: constant.language.boolean.true.tmux
     - match: \boff\b
       scope: constant.language.boolean.false.tmux
-    - match: \b{{hook_name__var}}\b
+    - match: \b({{hook_name__var}})\b
       scope: constant.language.hook-name.tmux
 
     # MARK: str, num, cmt
@@ -125,7 +125,7 @@ contexts:
     - match: \}
       scope: punctuation.section.expansion.parameter.end.tmux
       pop: true
-    - match: \b{{fmt_name__var}}\b
+    - match: \b({{fmt_name__var}})\b
       scope: variable.other.readwrite.tmux
     - match: (#)({)
       captures:
