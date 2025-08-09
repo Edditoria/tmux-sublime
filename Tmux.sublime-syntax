@@ -36,7 +36,7 @@ contexts:
     - match: \b({{hook_name__var}})\b
       scope: constant.language.hook-name.tmux
 
-    # MARK: str, num, cmt
+    # MARK: str
 
     - match: "'"
       scope: punctuation.definition.string.begin.tmux
@@ -57,6 +57,7 @@ contexts:
           pop: true
         - match: \\"
           scope: constant.character.escape.tmux
+        - include: style_expan__ctx
         - match: (#)({{fmt_alias__var}})(?![a-zA-Z_0-9])
           captures:
             1: punctuation.definition.variable.tmux
@@ -89,10 +90,15 @@ contexts:
         - match: \\$
           scope: punctuation.separator.continuation.tmux
 
+    # MARK: num, optr, cmt
+
     - match: '\s[\+\-]\d+\b'
       scope: constant.numeric.tmux
     - match: \b\d+\b
       scope: constant.numeric.tmux
+
+    - match: =
+      scope: keyword.operator.assignment.option.tmux
 
     - match: ^\s*(#.*)$
       scope: comment.line.number-sign.tmux
@@ -132,6 +138,7 @@ contexts:
     - match: \b({{fmt_name__var}})\b
       # fmt_alias__var matches before "($)({)"
       scope: variable.other.readwrite.tmux
+    - include: style_expan__ctx
     - match: (#)({)
       captures:
         1: punctuation.definition.variable.tmux
@@ -139,6 +146,22 @@ contexts:
       push: fmt__ctx
     # - match: \S
     #   scope: variable.other.readwrite.tmux
+
+  style_expan__ctx:
+    - match: (#)(\[)
+      captures:
+        1: punctuation.definition.variable.tmux
+        2: punctuation.section.expansion.parameter.begin.tmux
+      push:
+        - match: \]
+          scope: punctuation.section.expansion.parameter.end.tmux
+          pop: true
+        - include: style_assign__ctx
+
+  style_assign__ctx:
+    - match: \b(fg|bg)(=)
+      captures:
+        2: keyword.operator.assignment.option.tmux
 
 # MARK:- cmd vars
 
