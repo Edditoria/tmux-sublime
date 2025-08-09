@@ -55,8 +55,7 @@ contexts:
         - match: '"'
           scope: punctuation.definition.string.end.tmux
           pop: true
-        - match: \\"
-          scope: constant.character.escape.tmux
+        - include: esc_char__ctx
         - include: style_expan__ctx
         - match: (#)({{fmt_alias__var}})(?![a-zA-Z_0-9])
           captures:
@@ -67,8 +66,6 @@ contexts:
             1: punctuation.definition.variable.tmux
             2: punctuation.section.expansion.parameter.begin.tmux
           push: fmt__ctx
-        - match: \\\$
-          scope: constant.character.escape.tmux
         - match: (\$)({{shell_chars__var}})
           captures:
             1: punctuation.definition.variable.shell
@@ -99,6 +96,8 @@ contexts:
 
     - match: =
       scope: keyword.operator.assignment.option.tmux
+
+    - include: esc_char__ctx
 
     - match: ^\s*(#.*)$
       scope: comment.line.number-sign.tmux
@@ -162,6 +161,10 @@ contexts:
     - match: \b(fg|bg)(=)
       captures:
         2: keyword.operator.assignment.option.tmux
+
+  esc_char__ctx:
+    - match: \\.
+      scope: constant.character.escape.tmux
 
 # MARK:- cmd vars
 
