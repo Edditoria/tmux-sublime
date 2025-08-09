@@ -57,6 +57,10 @@ contexts:
           pop: true
         - match: \\"
           scope: constant.character.escape.tmux
+        - match: (#)({{fmt_alias__var}})(?![a-zA-Z_0-9])
+          captures:
+            1: punctuation.definition.variable.tmux
+            2: variable.other.readwrite.tmux
         - match: (#)({)
           captures:
             1: punctuation.definition.variable.tmux
@@ -126,6 +130,7 @@ contexts:
       scope: punctuation.section.expansion.parameter.end.tmux
       pop: true
     - match: \b({{fmt_name__var}})\b
+      # fmt_alias__var matches before "($)({)"
       scope: variable.other.readwrite.tmux
     - match: (#)({)
       captures:
@@ -255,6 +260,8 @@ variables:
 
   # MARK: fmt vars
 
+  # Ref: Manual page: Formats
+  fmt_alias__var: H|h|D|P|T|S|F|I|W
   # Ref: Manual page: Formats
   fmt_name__var: "\
     active_window_index|alternate_(on|saved_(x|y))|\
