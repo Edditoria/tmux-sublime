@@ -1,0 +1,32 @@
+# EditorConfig is a file format and collection of text editor plugins for maintaining consistent coding styles between different editors and IDEs.
+# Website: https://editorconfig.org
+#
+# NOTE: Remember to update .gitattributes for new changes.
+
+root = true
+
+[*]
+charset = utf-8
+# end_of_line = lf # text=auto in .gitattributes
+indent_style = tab
+insert_final_newline = true
+
+# This Repo
+
+[*.{sublime-syntax,yml,yaml}]
+indent_style = space
+indent_size = 2
+# Observed: Line ending is CRLF on Windows.
+
+[*.{tmPreferences,xml}]
+indent_style = tab
+
+# Common
+
+[*.md]
+# end_of_line = lf
+indent_style = space
+indent_size = 2
+
+# [*.{json,jsonc,json5}]
+# end_of_line = lf

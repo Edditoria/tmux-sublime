@@ -1,0 +1,14 @@
+{
+	"name": "Tmux 3 Syntax Highlight",
+	"details": "https://github.com/Edditoria/tmux-sublime",
+	"author": "Edditoria",
+	"labels": [
+		"language syntax"
+	],
+	"releases": [
+		{
+			"sublime_text": ">=3000",
+			"tags": true
+		}
+	]
+}
