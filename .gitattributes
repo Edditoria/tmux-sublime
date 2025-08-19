@@ -20,5 +20,6 @@
 test/* export-ignore
 tests/* export-ignore
 
+package-control.json export-ignore
 *.sublime-project export-ignore
 *.sublime-workspace export-ignore
